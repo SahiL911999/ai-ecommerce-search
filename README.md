@@ -172,7 +172,3 @@ This project was created as part of an AI developer test to demonstrate the abil
 ## 📄 **License**
 
 This project is open source and available under the [MIT License](LICENSE).
-
----
-
-**Built with ❤️ and AI** 🤖
