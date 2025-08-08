@@ -1,1 +1,122 @@
-[{"id":"123245","title":"A Book","imageUrl":"https://www.publicdomainpictures.net/pictures/10000/velka/1-1210009435EGmE.jpg","description":"This is an awesome book!","price":"19"},{"id":"0.41607315815753076","title":"fasfd","imageUrl":"fdasfs","description":"fadsfads","price":"12"}]
+[
+  {
+    "id": "1",
+    "title": "Nike Air Max Running Shoes",
+    "imageUrl": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400",
+    "description": "Premium running shoes with excellent cushioning and breathable mesh upper. Perfect for long-distance running and daily workouts.",
+    "price": 89.99,
+    "category": "running shoes",
+    "rating": 4.5,
+    "reviews": 128
+  },
+  {
+    "id": "2",
+    "title": "Adidas Ultraboost Training Shoes",
+    "imageUrl": "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=400",
+    "description": "High-performance training shoes with responsive cushioning and energy return technology. Ideal for gym workouts and cross-training.",
+    "price": 129.99,
+    "category": "training shoes",
+    "rating": 4.7,
+    "reviews": 95
+  },
+  {
+    "id": "3",
+    "title": "Apple MacBook Pro 13-inch",
+    "imageUrl": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400",
+    "description": "Powerful laptop with M2 chip, 8GB RAM, and 256GB SSD. Perfect for professionals and creative work with excellent performance.",
+    "price": 1299.99,
+    "category": "laptops",
+    "rating": 4.8,
+    "reviews": 342
+  },
+  {
+    "id": "4",
+    "title": "Samsung 4K Smart TV 55-inch",
+    "imageUrl": "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=400",
+    "description": "Crystal clear 4K resolution with smart features and built-in streaming apps. Immersive viewing experience for movies and gaming.",
+    "price": 599.99,
+    "category": "electronics",
+    "rating": 4.6,
+    "reviews": 203
+  },
+  {
+    "id": "5",
+    "title": "Wireless Bluetooth Headphones",
+    "imageUrl": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400",
+    "description": "Premium noise-canceling headphones with 30-hour battery life and crystal clear sound quality. Perfect for music lovers and professionals.",
+    "price": 199.99,
+    "category": "headphones",
+    "rating": 4.4,
+    "reviews": 156
+  },
+  {
+    "id": "6",
+    "title": "Organic Cotton T-Shirt",
+    "imageUrl": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400",
+    "description": "Comfortable and sustainable cotton t-shirt made from 100% organic materials. Available in multiple colors and sizes.",
+    "price": 24.99,
+    "category": "clothing",
+    "rating": 4.2,
+    "reviews": 89
+  },
+  {
+    "id": "7",
+    "title": "Stainless Steel Water Bottle",
+    "imageUrl": "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=400",
+    "description": "Insulated water bottle that keeps drinks cold for 24 hours or hot for 12 hours. BPA-free and eco-friendly design.",
+    "price": 34.99,
+    "category": "accessories",
+    "rating": 4.3,
+    "reviews": 67
+  },
+  {
+    "id": "8",
+    "title": "Gaming Mouse with RGB",
+    "imageUrl": "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=400",
+    "description": "High-precision gaming mouse with customizable RGB lighting and programmable buttons. Perfect for competitive gaming.",
+    "price": 79.99,
+    "category": "gaming",
+    "rating": 4.5,
+    "reviews": 112
+  },
+  {
+    "id": "9",
+    "title": "Yoga Mat Premium",
+    "imageUrl": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400",
+    "description": "Non-slip yoga mat with excellent cushioning and grip. Made from eco-friendly materials and includes carrying strap.",
+    "price": 49.99,
+    "category": "fitness",
+    "rating": 4.1,
+    "reviews": 73
+  },
+  {
+    "id": "10",
+    "title": "Coffee Maker with Grinder",
+    "imageUrl": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400",
+    "description": "Programmable coffee maker with built-in grinder and thermal carafe. Brews up to 12 cups with customizable strength settings.",
+    "price": 149.99,
+    "category": "kitchen",
+    "rating": 4.6,
+    "reviews": 98
+  },
+  {
+    "id": "11",
+    "title": "Wireless Charging Pad",
+    "imageUrl": "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=400",
+    "description": "Fast wireless charging pad compatible with all Qi-enabled devices. Sleek design with LED indicator and safety features.",
+    "price": 39.99,
+    "category": "electronics",
+    "rating": 4.0,
+    "reviews": 45
+  },
+  {
+    "id": "12",
+    "title": "Backpack with Laptop Compartment",
+    "imageUrl": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400",
+    "description": "Durable backpack with dedicated laptop compartment, multiple pockets, and water-resistant material. Perfect for work and travel.",
+    "price": 69.99,
+    "category": "accessories",
+    "rating": 4.4,
+    "reviews": 134
+  }
+]

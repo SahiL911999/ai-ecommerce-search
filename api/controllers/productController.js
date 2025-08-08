@@ -3,6 +3,149 @@ const asyncErrorHandler = require('../middlewares/helpers/asyncErrorHandler');
 const SearchFeatures = require('../utils/searchFeatures');
 const ErrorHandler = require('../utils/errorHandler');
 const cloudinary = require('cloudinary');
+const fs = require('fs');
+const path = require('path');
+
+// Get Local Products from JSON file
+exports.getLocalProducts = asyncErrorHandler(async (req, res, next) => {
+    try {
+        const productsPath = path.join(__dirname, '../data/products.json');
+        const productsData = fs.readFileSync(productsPath, 'utf8');
+        const products = JSON.parse(productsData);
+
+        res.status(200).json({
+            success: true,
+            products,
+        });
+    } catch (error) {
+        return next(new ErrorHandler("Error loading products", 500));
+    }
+});
+
+// AI-Powered Product Search using OpenAI
+exports.aiProductSearch = asyncErrorHandler(async (req, res, next) => {
+    const { query } = req.body;
+    
+    if (!query) {
+        return next(new ErrorHandler("Search query is required", 400));
+    }
+
+    try {
+        // Load products from JSON file
+        const productsPath = path.join(__dirname, '../data/products.json');
+        const productsData = fs.readFileSync(productsPath, 'utf8');
+        const allProducts = JSON.parse(productsData);
+
+        // For demo purposes, we'll implement a simple NLP-like search
+        // In a real implementation, you would use OpenAI API here
+        const searchResults = performSmartSearch(query, allProducts);
+
+        res.status(200).json({
+            success: true,
+            query,
+            results: searchResults,
+            totalResults: searchResults.length
+        });
+    } catch (error) {
+        return next(new ErrorHandler("Error performing AI search", 500));
+    }
+});
+
+// Smart search function (simulates NLP processing)
+function performSmartSearch(query, products) {
+    const lowerQuery = query.toLowerCase();
+    const results = [];
+    
+    // Extract price range from query
+    const priceMatch = lowerQuery.match(/(?:under|less than|below|max|maximum)\s*\$?(\d+)/);
+    const maxPrice = priceMatch ? parseFloat(priceMatch[1]) : null;
+    
+    // Extract rating requirements
+    const ratingMatch = lowerQuery.match(/(?:good|high|excellent)\s*(?:reviews?|rating)/);
+    const minRating = ratingMatch ? 4.0 : null;
+    
+    // Extract category/keywords
+    const keywords = lowerQuery.split(' ').filter(word => 
+        word.length > 2 && 
+        !['show', 'me', 'with', 'and', 'the', 'for', 'under', 'over', 'good', 'bad', 'high', 'low'].includes(word)
+    );
+
+    products.forEach(product => {
+        let score = 0;
+        let matches = [];
+        let shouldInclude = true;
+        
+        // Check title and description
+        const productText = `${product.title} ${product.description} ${product.category}`.toLowerCase();
+        
+        // Extract specific product types from query
+        const productTypes = ['shoes', 'laptops', 'electronics', 'accessories', 'clothing', 'headphones', 'gaming', 'fitness', 'kitchen'];
+        const requestedTypes = productTypes.filter(type => lowerQuery.includes(type));
+        
+        // Check if this product matches the requested type
+        let typeMatch = false;
+        if (requestedTypes.length > 0) {
+            typeMatch = requestedTypes.some(type => 
+                productText.includes(type) || product.category.includes(type)
+            );
+        }
+        
+        // If specific product type is requested but this product doesn't match, exclude it
+        if (requestedTypes.length > 0 && !typeMatch) {
+            shouldInclude = false;
+        }
+        
+        // Keyword matching (only if no specific product type is requested or if type matches)
+        if (shouldInclude) {
+            keywords.forEach(keyword => {
+                if (productText.includes(keyword)) {
+                    score += 2;
+                    matches.push(keyword);
+                }
+            });
+        }
+        
+        // Price filtering
+        if (maxPrice) {
+            if (product.price <= maxPrice) {
+                score += 3;
+                matches.push(`under $${maxPrice}`);
+            } else {
+                shouldInclude = false; // Exclude if over price limit
+            }
+        }
+        
+        // Rating filtering
+        if (minRating) {
+            if (product.rating >= minRating) {
+                score += 2;
+                matches.push(`good reviews (${product.rating}⭐)`);
+            } else {
+                shouldInclude = false; // Exclude if below rating threshold
+            }
+        }
+        
+        // Category matching
+        if (lowerQuery.includes(product.category)) {
+            score += 5;
+            matches.push(product.category);
+        }
+        
+        // Only include if all criteria are met and score is positive
+        if (shouldInclude && score > 0) {
+            results.push({
+                ...product,
+                searchScore: score,
+                matchedTerms: matches
+            });
+        }
+    });
+    
+    // Sort by relevance score
+    results.sort((a, b) => b.searchScore - a.searchScore);
+    
+    return results.slice(0, 8); // Return top 8 results
+}
 
 // Get All Products
 exports.getAllProducts = asyncErrorHandler(async (req, res, next) => {

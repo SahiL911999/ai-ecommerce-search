@@ -11,11 +11,16 @@ process.on('uncaughtException', (err) => {
 
 // connectDatabase();
 
-cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_NAME,
-    api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET,
-});
+// Only configure cloudinary if environment variables are available
+if (process.env.CLOUDINARY_NAME && process.env.CLOUDINARY_API_KEY && process.env.CLOUDINARY_API_SECRET) {
+    cloudinary.config({
+        cloud_name: process.env.CLOUDINARY_NAME,
+        api_key: process.env.CLOUDINARY_API_KEY,
+        api_secret: process.env.CLOUDINARY_API_SECRET,
+    });
+} else {
+    console.log('Cloudinary configuration skipped - environment variables not set');
+}
 
 const server = app.listen(PORT, () => {
     console.log(`Server running`)
